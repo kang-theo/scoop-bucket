@@ -1,3 +1,4 @@
+
 {
   "version": "2.2.2",
   "description": "Vim-style keyboard navigation for Windows",
@@ -6,6 +7,14 @@
     "64bit": {
       "url": "https://github.com/goreliu/vimdesktop/releases/download/v2.2.2/VimDesktop-x86_64-2.2.2.7z",
       "hash": "c0832f2facc5c277f61fa19a3cbc44b7126ce318de5a5298635b25d946edd3bc"
+    }
+  },
+  "checkver": "github",
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/goreliu/vimdesktop/releases/download/v$version/VimDesktop-x86_64-$version.7z"
+      }
     }
   }
 }

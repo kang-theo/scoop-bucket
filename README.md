@@ -1,42 +1,249 @@
-# Scoop Bucket Template
+# My Scoop Bucket
 
-<!-- Uncomment the following line after replacing placeholders -->
-<!-- [![Tests](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml) [![Excavator](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml) -->
+Personal [Scoop](https://scoop.sh/) Bucket for managing Windows applications.
 
-Template bucket for [Scoop](https://scoop.sh), the Windows command-line installer.
+| Application | Type | Version |
+| --- | --- | --- |
+| [VimDesktop](https://github.com/goreliu/vimdesktop) | GUI | 2.2.2 |
+| [TUIOS](https://github.com/Gaurav-Gosain/tuios) | CLI | 0.12.1 |
 
-## How do I use this template?
+## 1. Create a Bucket
 
-1. Generate your own copy of this repository with the "Use this template"
-   button.
-2. Allow all GitHub Actions:
-   - Navigate to `Settings` - `Actions` - `General` - `Actions permissions`.
-   - Select `Allow all actions and reusable workflows`.
-   - Then `Save`.
-3. Workflow permissions:
-   - Navigate to `Settings` - `Actions` - `General` - `Workflow permissions`.
-   - Ensure `Read repository contents and packages permissions` is selected.
-   - Then `Save`.
-4. Document the bucket in `README.md`.
-5. Replace the placeholder repository string in `bin/auto-pr.ps1`.
-6. Create new manifests by copying `bucket/app-name.json.template` to
-   `bucket/<app-name>.json`.
-7. Commit and push changes.
-8. If you'd like your bucket to be indexed on `https://scoop.sh`, add the
-   topic `scoop-bucket` to your repository.
+1. Open [Scoop BucketTemplate](https://github.com/ScoopInstaller/BucketTemplate).
+2. Click **Use this template → Create a new repository**, named `scoop-bucket`.
+3. Configure **Settings → Actions → General**:
+   - **Actions permissions:** Allow all actions and reusable workflows.
+   - **Workflow permissions:** Read and write permissions.
+   - Enable Actions to create pull requests if required.
+4. Replace the repository placeholder in `bin/auto-pr.ps1`.
 
-## How do I install these manifests?
+Clone the repository:
 
-After manifests have been committed and pushed, run the following:
-
-```pwsh
-scoop bucket add <bucketname> https://github.com/<username>/<bucketname>
-scoop install <bucketname>/<manifestname>
+```powershell
+git clone https://github.com/<username>/scoop-bucket.git
+cd scoop-bucket
 ```
 
-## How do I contribute new manifests?
+<details>
+<summary>Repository structure</summary>
 
-To make a new manifest contribution, please read the [Contributing
-Guide](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
-and [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)
-wiki page.
+```text
+scoop-bucket/
+├── bucket/
+│   ├── vimdesktop.json
+│   └── tuios.json
+├── .github/workflows/
+├── bin/
+│   └── auto-pr.ps1
+└── README.md
+```
+
+</details>
+
+## 2. Create Application Manifests
+
+Create one JSON file per application in `bucket/`. The following examples include automatic version-checking rules.
+
+<details>
+<summary><strong>VimDesktop — bucket/vimdesktop.json</strong></summary>
+
+Release: [VimDesktop v2.2.2](https://github.com/goreliu/vimdesktop/releases/tag/v2.2.2)
+
+```json
+{
+  "version": "2.2.2",
+  "description": "Vim-style keyboard navigation for Windows",
+  "homepage": "https://github.com/goreliu/vimdesktop",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/goreliu/vimdesktop/releases/download/v2.2.2/VimDesktop-x86_64-2.2.2.7z",
+      "hash": "<SHA256>"
+    }
+  },
+  "checkver": "github",
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/goreliu/vimdesktop/releases/download/v$version/VimDesktop-x86_64-$version.7z"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>TUIOS — bucket/tuios.json</strong></summary>
+
+Release: [TUIOS v0.12.1](https://github.com/Gaurav-Gosain/tuios/releases/tag/v0.12.1)
+
+```json
+{
+  "version": "0.12.1",
+  "description": "Terminal window manager with tiling panes and persistent sessions",
+  "homepage": "https://github.com/Gaurav-Gosain/tuios",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/Gaurav-Gosain/tuios/releases/download/v0.12.1/tuios_0.12.1_Windows_x86_64.tar.gz",
+      "hash": "<SHA256>"
+    }
+  },
+  "bin": "tuios.exe",
+  "checkver": "github",
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/Gaurav-Gosain/tuios/releases/download/v$version/tuios_$version_Windows_x86_64.tar.gz"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+### Generate SHA256
+
+Download each release archive and calculate its checksum:
+
+```powershell
+(Get-FileHash .\downloaded-file.7z -Algorithm SHA256).Hash.ToLower()
+```
+
+Replace `<SHA256>` with the actual checksum. Use the `.tar.gz` filename for TUIOS.
+
+<details>
+<summary>Manifest fields explained</summary>
+
+| Field | Purpose |
+| --- | --- |
+| `version` | Application version |
+| `url` | Download URL |
+| `hash` | SHA256 verification |
+| `architecture` | Supported CPU architectures |
+| `bin` | Register terminal commands |
+| `shortcuts` | Create Start Menu shortcuts |
+| `persist` | Preserve configuration across updates |
+| `checkver` | Detect new releases |
+| `autoupdate` | Generate version-specific URLs |
+
+Scoop supports `.7z` and `.tar.gz` archives. Verify executable paths inside archives before configuring `bin` or `shortcuts`.
+
+</details>
+
+## 3. Publish and Install
+
+Commit and push the Manifests:
+
+```powershell
+git add .
+git commit -m "add vimdesktop and tuios"
+git push
+```
+
+Add the Bucket to Scoop (once per computer):
+
+```powershell
+scoop bucket add myapps https://github.com/<username>/scoop-bucket
+```
+
+Install:
+
+```powershell
+scoop install myapps/vimdesktop
+scoop install myapps/tuios
+```
+
+<details>
+<summary>Common Scoop commands</summary>
+
+| Command | Description |
+| --- | --- |
+| `scoop bucket list` | List Buckets |
+| `scoop search tuios` | Search applications |
+| `scoop cat myapps/tuios` | View Manifest |
+| `scoop update` | Refresh Scoop and Buckets |
+| `scoop update *` | Update installed applications |
+| `scoop uninstall tuios` | Uninstall application |
+| `scoop bucket rm myapps` | Remove Bucket |
+
+</details>
+
+## 4. Automatic Updates
+
+**A. Update Bucket Manifests**
+
+`checkver` detects new GitHub Releases; `autoupdate` defines the URL pattern for generating updated Manifests and hashes.
+
+Run from the repository root:
+
+```powershell
+$checkver = "$HOME\scoop\apps\scoop\current\bin\checkver.ps1"
+
+& $checkver -App vimdesktop -Dir .\bucket -Update
+& $checkver -App tuios -Dir .\bucket -Update
+```
+
+Review and publish:
+
+```powershell
+git diff
+git add bucket
+git commit -m "update application versions"
+git push
+```
+
+Alternatively, configure the BucketTemplate GitHub Actions to detect new releases and create update pull requests.
+
+**B. Update Installed Applications**
+
+After updated Manifests have been published:
+
+```powershell
+scoop update
+scoop update *
+```
+
+<details>
+<summary>How automatic updates work</summary>
+
+```text
+GitHub Releases
+      ↓
+checkver + autoupdate
+      ↓
+Update Manifest (version, URL, SHA256)
+      ↓
+GitHub Actions → Pull Request → Merge
+      ↓
+scoop update
+scoop update *
+```
+
+- `checkver` detects new versions.
+- `autoupdate` provides the new download URL pattern.
+- GitHub Actions can automate Manifest maintenance.
+- Scoop updates installed applications using published Manifests.
+- `autoupdate` alone does not schedule or install updates.
+
+</details>
+
+## 5. Notes
+
+<details>
+<summary>Configuration and troubleshooting</summary>
+
+- **GUI vs CLI:** VimDesktop can use `shortcuts`; TUIOS uses `bin`.
+- **Configuration:** Use `persist` if application settings reside inside the installation directory.
+- **Executable paths:** Check archive contents before configuring `bin` or `shortcuts`.
+- **SHA256 errors:** Recalculate the hash from the exact release archive.
+- **Version patterns:** Update `autoupdate` if upstream release filenames change.
+- **Built-in updaters:** Avoid mixing Scoop updates with applications' own update mechanisms.
+
+</details>
+
+## References
+
+[Scoop](https://scoop.sh/) · [BucketTemplate](https://github.com/ScoopInstaller/BucketTemplate) · [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)
