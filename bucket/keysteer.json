@@ -1,0 +1,24 @@
+{
+    "version": "0.15.6",
+    "description": "Keyboard-driven mouse and window management for Windows and macOS",
+    "homepage": "https://github.com/dccif/KeySteer",
+    "license": "GPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/dccif/KeySteer/releases/download/v0.15.6/KeySteer-v0.15.6-x86_64-pc-windows-msvc.zip",
+            "hash": "6cea2a023d8138669cf1c8866c663c96b802510c2eae172d880df3818bd7588d"
+        }
+    },
+    "extract_dir": "KeySteer",
+    "bin": "KeySteer.exe",
+    "checkver": {
+        "github": "https://github.com/dccif/KeySteer"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/dccif/KeySteer/releases/download/v$version/KeySteer-v$version-x86_64-pc-windows-msvc.zip"
+            }
+        }
+    }
+}
