@@ -10,6 +10,7 @@
             "hash": "78ceaec4c58f4fcd37ab115d5e4374f754aa7adc0675555edfe6aac9a1b8984c"
         }
     },
+    "extract_dir": "WindInput-0.132.0",
     "bin": [
         [
             "wind_portable.exe",
@@ -22,7 +23,10 @@
             "WindInput"
         ]
     ],
-    "persist": "userdata",
+    "persist": [
+        "userdata",
+        "localdata"
+    ],
     "checkver": {
         "github": "https://github.com/huanfeng/WindInput"
     },
@@ -31,12 +35,12 @@
             "64bit": {
                 "url": "https://github.com/huanfeng/WindInput/releases/download/v$version/WindInput-Portable-$version.zip"
             }
-        }
+        },
+        "extract_dir": "WindInput-$version"
     },
     "notes": [
-        "Run wind_portable.exe to register the input method.",
-        "Close WindInput and unregister its components before upgrading or uninstalling.",
-        "User configuration and dictionaries are preserved in the userdata directory."
+        "Run windinput or wind_portable.exe to register and start the input method.",
+        "Before upgrading or uninstalling, stop the portable input method using wind_portable.exe -stop.",
+        "User data and local data are preserved across Scoop upgrades."
     ]
 }
-
