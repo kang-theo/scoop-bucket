@@ -1,0 +1,42 @@
+
+{
+    "version": "0.132.0",
+    "description": "WindInput - A customizable Chinese input method for Windows",
+    "homepage": "https://windinput.com/",
+    "license": "GPL-3.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/huanfeng/WindInput/releases/download/v0.132.0/WindInput-Portable-0.132.0.zip",
+            "hash": "78ceaec4c58f4fcd37ab115d5e4374f754aa7adc0675555edfe6aac9a1b8984c"
+        }
+    },
+    "bin": [
+        [
+            "wind_portable.exe",
+            "windinput"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "wind_portable.exe",
+            "WindInput"
+        ]
+    ],
+    "persist": "userdata",
+    "checkver": {
+        "github": "https://github.com/huanfeng/WindInput"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/huanfeng/WindInput/releases/download/v$version/WindInput-Portable-$version.zip"
+            }
+        }
+    },
+    "notes": [
+        "Run wind_portable.exe to register the input method.",
+        "Close WindInput and unregister its components before upgrading or uninstalling.",
+        "User configuration and dictionaries are preserved in the userdata directory."
+    ]
+}
+
