@@ -1,0 +1,30 @@
+{
+    "version": "0.8.0",
+    "description": "A fast, lightweight Windows file explorer built with Rust and GPUI",
+    "homepage": "https://github.com/Koimsurai/Arke",
+    "license": "AGPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Koimsurai/Arke/releases/download/v0.8.0/arke-0.8.0.exe",
+            "hash": "db3b2889c03c1ac51e6b3f785ded679f3c2d9a969344a5131ba871ba8bb75166"
+        }
+    },
+    "pre_install": "Rename-Item \"$dir\\arke-$version.exe\" 'arke.exe'",
+    "bin": "arke.exe",
+    "shortcuts": [
+        [
+            "arke.exe",
+            "Arke"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/Koimsurai/Arke"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Koimsurai/Arke/releases/download/v$version/arke-$version.exe"
+            }
+        }
+    }
+}

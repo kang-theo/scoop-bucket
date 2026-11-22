@@ -4,8 +4,13 @@ Personal [Scoop](https://scoop.sh/) Bucket for managing Windows applications.
 
 | Application | Type | Version |
 | --- | --- | --- |
-| [VimDesktop](https://github.com/goreliu/vimdesktop) | GUI | 2.2.2 |
-| [TUIOS](https://github.com/Gaurav-Gosain/tuios) | CLI | 0.12.1 |
+| [VimDesktop](https://github.com/goreliu/vimdesktop) | GUI | See Manifest |
+| [TUIOS](https://github.com/Gaurav-Gosain/tuios) | CLI | See Manifest |
+| [KeySteer](https://github.com/dccif/KeySteer) | GUI | See Manifest |
+| [Rove](https://github.com/cap153/rove) | GUI | See Manifest |
+| [Arke](https://github.com/Koimsurai/Arke) | GUI | See Manifest |
+| [WindInput](https://github.com/huanfeng/WindInput) | GUI | See Manifest |
+| [Stashit](https://github.com/kobaltgit/StashIt) | GUI | See Manifest |
 
 ## 1. Create a Bucket
 
@@ -31,6 +36,12 @@ cd scoop-bucket
 scoop-bucket/
 ├── bucket/
 │   ├── vimdesktop.json
+│   ├── tuios.json
+│   ├── keysteer.json
+│   ├── rove.json
+│   ├── arke.json
+│   ├── windinput.json
+│   ├── stashit.json
 │   └── tuios.json
 ├── .github/workflows/
 ├── bin/
@@ -154,6 +165,11 @@ Install:
 ```powershell
 scoop install myapps/vimdesktop
 scoop install myapps/tuios
+scoop install myapps/keysteer
+scoop install myapps/rove
+scoop install myapps/arke
+scoop install myapps/windinput
+scoop install myapps/stashit
 ```
 
 <details>
@@ -184,6 +200,11 @@ $checkver = "$HOME\scoop\apps\scoop\current\bin\checkver.ps1"
 
 & $checkver -App vimdesktop -Dir .\bucket -Update
 & $checkver -App tuios -Dir .\bucket -Update
+& $checkver -App keysteer -Dir .\bucket -Update
+& $checkver -App rove -Dir .\bucket -Update
+& $checkver -App arke -Dir .\bucket -Update
+& $checkver -App windinput -Dir .\bucket -Update
+& $checkver -App stashit -Dir .\bucket -Update
 ```
 
 Review and publish:
