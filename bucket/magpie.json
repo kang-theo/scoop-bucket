@@ -1,0 +1,32 @@
+{
+    "version": "0.6.12",
+    "description": "Spotlight-style local launcher: search GitHub stars, files, images, bookmarks, history, clipboard, and apps.",
+    "homepage": "https://github.com/newdee/magpie",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/newdee/magpie/releases/download/v0.6.12/magpie_0.6.12_x64-setup.exe#/dl.7z",
+            "hash": "ad868869347f6d8451b57be2728b710b683f314e20e92a30fa27940ebd0595f4"
+        }
+    },
+    "pre_install": [
+        "if (!(Test-Path \"$dir\\magpie.exe\")) { throw 'magpie.exe not found in extracted package.' }",
+        "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse -Force -ErrorAction SilentlyContinue",
+        "Remove-Item \"$dir\\uninstall.exe\" -Force -ErrorAction SilentlyContinue"
+    ],
+    "bin": "magpie.exe",
+    "shortcuts": [
+        [
+            "magpie.exe",
+            "magpie"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/newdee/magpie/releases/download/v$version/magpie_$version_x64-setup.exe#/dl.7z"
+            }
+        }
+    }
+}

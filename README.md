@@ -11,6 +11,7 @@ Personal [Scoop](https://scoop.sh/) Bucket for managing Windows applications.
 | [Arke](https://github.com/Koimsurai/Arke) | GUI | See Manifest |
 | [WindInput](https://github.com/huanfeng/WindInput) | GUI | See Manifest |
 | [Stashit](https://github.com/kobaltgit/StashIt) | GUI | See Manifest |
+| [Magpie](https://github.com/newdee/magpie) | GUI | See Manifest |
 
 ## 1. Create a Bucket
 
@@ -42,7 +43,7 @@ scoop-bucket/
 │   ├── arke.json
 │   ├── windinput.json
 │   ├── stashit.json
-│   └── tuios.json
+│   └── magpie.json
 ├── .github/workflows/
 ├── bin/
 │   └── auto-pr.ps1
@@ -170,6 +171,7 @@ scoop install myapps/rove
 scoop install myapps/arke
 scoop install myapps/windinput
 scoop install myapps/stashit
+scoop install myapps/magpie
 ```
 
 <details>
@@ -205,6 +207,7 @@ $checkver = "$HOME\scoop\apps\scoop\current\bin\checkver.ps1"
 & $checkver -App arke -Dir .\bucket -Update
 & $checkver -App windinput -Dir .\bucket -Update
 & $checkver -App stashit -Dir .\bucket -Update
+& $checkver -App magpie -Dir .\bucket -Update
 ```
 
 Review and publish:
