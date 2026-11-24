@@ -1,0 +1,32 @@
+{
+    "version": "1.9.1",
+    "description": "A WinUI 3 hardware diagnostics and system maintenance toolbox.",
+    "homepage": "https://github.com/luolangaga/tubatools",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/luolangaga/tubatools/releases/download/v1.9.1/TubaWinUi3_Portable_1.9.1_x64.zip",
+            "hash": "8bccec71536decc7725a40580c3c813750e2a3ac27a5feffdda31f5ca0b558b7"
+        }
+    },
+    "bin": [
+        [
+            "图吧工具箱WinUI3.exe",
+            "tubatools"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "图吧工具箱WinUI3.exe",
+            "TubaTools"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/luolangaga/tubatools/releases/download/v$version/TubaWinUi3_Portable_$version_x64.zip"
+            }
+        }
+    }
+}
