@@ -1,12 +1,12 @@
 {
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A lightweight Windows file manager built with Rust and Slint",
     "homepage": "https://github.com/cap153/rove",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/cap153/rove/releases/download/v0.1.2/rove.exe",
-            "hash": "1170270375b4cb114b925b0db7aae19982ac1ac02f395c85b139683911d0ea1e"
+            "url": "https://github.com/cap153/rove/releases/download/v0.1.3/rove.exe",
+            "hash": "5f709c2a629118a17d5b9fbc0a0f541999773c3da3dd938a4cb78bd3c9aa8645"
         }
     },
     "bin": "rove.exe",
